@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaClock, FaMapMarkerAlt, FaComment, FaHeart, FaShare } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const SinglePostCard = ({ post, searchText }) => {
      const { id, userId, title, body } = post;
@@ -64,16 +64,14 @@ const SinglePostCard = ({ post, searchText }) => {
 
      const reactGenerator = Math.floor(Math.random() * 999 + 10);
 
-     const username = user.name.replace(/ /g,"_"); 
-
      return (
-          <Link to={`/forum/${username}/${id}`}>
+          <NavLink to={`/forum/${user.name}/${id}`}>
                <div className="my-5 mx-5 bg-slate-100 rounded-md shadow-md pt-5 dark:bg-slate-700">
                     <div className="px-4 sm:px-8">
                          <div className="flex items-center">
                               <div className="avatar">
                                    <div className="w-12 rounded-full">
-                                        <img src="https://placeimg.com/192/192/people" alt="User" />
+                                        <img src="https://placeimg.com/192/192/people" alt="User" draggable='false' />
                                    </div>
                               </div>
                               <div className="ml-3 text-slate-600 dark:text-slate-200">
@@ -84,9 +82,9 @@ const SinglePostCard = ({ post, searchText }) => {
                          <div className="divider mt-1 mb-2"></div>
                          <div>
                               {
-                                   searchText && <Highlighted>
+                                   searchText ? <Highlighted>
                                         <h1 className="text-2xl font-bold text-violet-800 mb-2 dark:text-violet-400 post-content">{title}</h1>
-                                   </Highlighted>
+                                   </Highlighted> : <h1 className="text-2xl font-bold text-violet-800 mb-2 dark:text-violet-400 post-content">{title}</h1>
                               }
                               <p className="text-slate-500 dark:text-slate-200 post-content">{body}.</p>
                          </div>
@@ -106,7 +104,7 @@ const SinglePostCard = ({ post, searchText }) => {
                          </div>
                     </div>
                </div>
-          </Link>
+          </NavLink>
      );
 };
 

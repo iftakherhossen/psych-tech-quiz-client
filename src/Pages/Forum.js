@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FeaturedPosts from '../components/ForumComponents/FeaturedPosts';
 import ForumSearchBar from '../components/ForumComponents/ForumSearchBar';
 

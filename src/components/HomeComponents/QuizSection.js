@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import quizzes from '../../assets/quizzes';
-import SingleQuizCard from './SingleQuizCard';
+import SingleCard from './SingleCard';
 
 const QuizSection = () => {
      const [allQuizzes, setAllQuizzes] = useState([]);
      const [showMore, setShowMore] = useState(false);
      const [category, setCategory] = useState('');
+
+     // sort by isAvailable
+     // const sortArray = allQuizzes.sort((x, y) => {
+     //      return (x.isAvailable === y.isAvailable) ? 0 : x.isAvailable ? -1 : 1;
+     // });
 
      useEffect(() => {
           setAllQuizzes(quizzes.sort());
@@ -46,7 +51,7 @@ const QuizSection = () => {
      }
 
      const filteredQuizzesCalled = filterCourseByCategory(category);
-     const filteredQuiz = filteredQuizzesCalled.map((course) => <SingleQuizCard key={course.id} course={course} />);
+     const filteredQuiz = filteredQuizzesCalled.map((course) => <SingleCard key={course.id} course={course} />);
 
      return (
           <div className='bg-white dark:bg-slate-800'>
@@ -63,10 +68,10 @@ const QuizSection = () => {
                               <div className="py-10">
                                    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
                                         {
-                                             showMore === false ? shuffledQuizzes.map(course => <SingleQuizCard
+                                             showMore === false ? shuffledQuizzes.map(course => <SingleCard
                                                   key={course.id}
                                                   course={course}
-                                             />) : allQuizzes.map(course => <SingleQuizCard
+                                             />) : allQuizzes.map(course => <SingleCard
                                                   key={course.id}
                                                   course={course}
                                              />)

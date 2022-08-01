@@ -44,7 +44,7 @@ const ForumSearchBar = () => {
 
                <div className="text-center mt-5">
                     {
-                         results.length < 0 && <p className="text-slate-400 text-base">Result Found: <span className="font-bold">{results.length}</span></p>
+                         results.length > 0 && <p className="text-slate-400 text-base">Result Found: <span className="font-bold">{results.length}</span></p>
                     }
                     {
                          searchText && results.length === 0 && <p className="text-red-600 dark:text-red-400 text-base">Result Not Found!</p>

@@ -2,6 +2,7 @@ import React from 'react';
 import { FaUserGraduate } from 'react-icons/fa';
 import { FiUsers } from 'react-icons/fi';
 import { MdQuiz } from 'react-icons/md';
+import problems from '../../assets/problems';
 import courses from '../../assets/quizzes';
 
 
@@ -13,15 +14,15 @@ const Stats = () => {
                          <div className="stat-figure text-secondary">
                               <MdQuiz className="text-4xl" />
                          </div>                         
-                         <div className="stat-value text-secondary">{courses.length}+</div>
-                         <div className="stat-title text-secondary text-xl opacity-100">Quizzes</div>
+                         <div className="stat-value text-secondary">{courses.length}+ & {problems.length}+</div>
+                         <div className="stat-title text-secondary text-xl opacity-100">Quizzes & Problems</div>
                     </div>
                     <div className="divider divider-horizontal"></div>
                     <div className="stat">
                          <div className="stat-figure text-primary">
                               <FiUsers className="text-4xl" />
                          </div>
-                         <div className="stat-value text-primary">2.6M</div>
+                         <div className="stat-value text-primary">2.6M+</div>
                          <div className="stat-title text-primary text-xl opacity-100">Users</div>
                     </div>
                     <div className="divider divider-horizontal"></div>
