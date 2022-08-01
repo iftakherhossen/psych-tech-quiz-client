@@ -2,6 +2,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
 import Footer from './components/Common/Footer';
 import Navigation from './components/Common/Navigation';
+import ProfileSection from "./components/ProfileComponents/ProfileSection";
+import QuizzesSection from "./components/ProfileComponents/QuizzesSection";
+import SettingsSection from "./components/ProfileComponents/SettingsSection";
+import SolvedProblemsSection from "./components/ProfileComponents/SolvedProblemsSection";
 import AuthProvider from "./context/AuthProvider/AuthProvider";
 import Forum from "./Pages/Forum";
 import Home from './Pages/Home';
@@ -26,7 +30,12 @@ function App() {
           <Route path="/playground" element={<Playground />} />
           <Route path="/quiz/:name" element={<Quiz />} />
           <Route path="/quiz/:name/result" element={<QuizResult />} />
-          <Route path="/user/:username" element={<Profile />} />
+          <Route path="/user/:email" element={<Profile />}>
+            <Route index element={<ProfileSection />} />            
+            <Route path="quizzes" element={<QuizzesSection />} />            
+            <Route path="solved-problems" element={<SolvedProblemsSection />} />            
+            <Route path="settings" element={<SettingsSection />} />            
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

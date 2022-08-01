@@ -19,7 +19,7 @@ const SingleCard = ({ course, problem }) => {
                          </div>
                          <div className="card-actions">
                               {
-                                   !isAvailable === false ? <Link to={`/quiz/${name === 'C#' ? 'csharp' : name.toLowerCase().replace(/\s/g, '')}`}>
+                                   !isAvailable === false ? <Link to={!problem ? `/quiz/${name === 'C#' ? 'csharp' : name.toLowerCase().replace(/\s/g, '')}` : `/problem-solving/${name === 'C#' ? 'csharp' : name.toLowerCase().replace(/\s/g, '')}`}>
                                         <button className="btn bg-rose-500 border-0 btn-sm px-4 disabled:bg-rose-300 disabled:text-slate-500">
                                              {
                                                   problem ? (isAvailable === false ? 'Coming Soon' : 'Solve Problems') : (isAvailable === false ? 'Coming Soon' : 'Join Quiz')

@@ -108,6 +108,8 @@ const JoinNow = () => {
                                                        />
                                                   </form>
                                              }
+
+                                             <p className='text-center mt-4 text-blue-500'>Sign-up to get 50 points to start!</p>
                                         </div>
                                    </div>
                               </div>
