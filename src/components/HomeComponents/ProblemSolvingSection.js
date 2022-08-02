@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import problems from '../../assets/problems';
+import database from '../../assets/database.json';
 import SingleCard from './SingleCard';
 
 const ProblemSolvingSection = () => {
      const [allProblems, setAllProblems] = useState([]);
      const [showMore, setShowMore] = useState(false);
+
+     const problems = Object.keys(database.problemsSolvingCategory).map(key => {
+          return database.quizzes[key];
+     });
 
      useEffect(() => {
           setAllProblems(problems.sort());

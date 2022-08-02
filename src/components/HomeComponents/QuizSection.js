@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import quizzes from '../../assets/quizzes';
+import database from '../../assets/database.json';
 import SingleCard from './SingleCard';
 
 const QuizSection = () => {
@@ -9,8 +9,12 @@ const QuizSection = () => {
      const [showMore, setShowMore] = useState(false);
      const [category, setCategory] = useState('');
 
+     const quizzes = Object.keys(database.quizzes).map(key => {
+          return database.quizzes[key];
+     });
+
      // sort by isAvailable
-     // const sortArray = allQuizzes.sort((x, y) => {
+     // const sortArray = quizzes.sort((x, y) => {
      //      return (x.isAvailable === y.isAvailable) ? 0 : x.isAvailable ? -1 : 1;
      // });
 

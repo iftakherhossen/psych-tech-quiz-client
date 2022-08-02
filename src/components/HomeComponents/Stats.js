@@ -2,11 +2,12 @@ import React from 'react';
 import { FaUserGraduate } from 'react-icons/fa';
 import { FiUsers } from 'react-icons/fi';
 import { MdQuiz } from 'react-icons/md';
-import problems from '../../assets/problems';
-import courses from '../../assets/quizzes';
-
+import database from '../../assets/database.json';
 
 const Stats = () => {
+     const quizzes = Object.keys(database.quizzes).length;
+     const problems = Object.keys(database.problemsSolvingCategory).length;
+
      return (
           <div className="bg-white dark:bg-slate-800 flex justify-center pt-5 pb-16">
                <div className="stats shadow bg-white dark:bg-slate-800 w-4/6 py-5 flex flex-col md:flex-row">
@@ -14,8 +15,8 @@ const Stats = () => {
                          <div className="stat-figure text-secondary">
                               <MdQuiz className="text-4xl" />
                          </div>                         
-                         <div className="stat-value text-secondary">{courses.length}+ & {problems.length}+</div>
-                         <div className="stat-title text-secondary text-xl opacity-100">Quizzes & Problems</div>
+                         <div className="stat-value text-secondary">{quizzes}+ & {problems}+</div>
+                         <div className="stat-title text-secondary text-xl opacity-100">Quiz & Problem Solving Category</div>
                     </div>
                     <div className="divider divider-horizontal"></div>
                     <div className="stat">

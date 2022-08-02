@@ -23,7 +23,7 @@ const ProfileSection = () => {
                          </div>
                          <div>
                               {
-                                   userScore <= 1000 && <div class="badge badge-outline text-white border-white px-6 py-5 text-lg">Bronze - {userScore} pt</div>
+                                   userScore <= 1000 && <div className="badge badge-outline text-white border-white px-6 py-5 text-lg">Bronze - {userScore} pt</div>
                               }
                               {
                                    userScore > 1000 && userScore <= 2000 && <div class="badge badge-outline text-white border-white px-6 py-5 text-lg">Silver - {userScore}</div>

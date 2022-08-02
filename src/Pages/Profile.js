@@ -8,8 +8,8 @@ const Profile = () => {
           <div className='bg-white dark:bg-slate-800'>
                <div className='drawer drawer-mobile'>
                     <input id='my-drawer-2' type='checkbox' className='drawer-toggle' />
-                    <div className='drawer-content p-2 h-full'>
-                         <label htmlFor='my-drawer-2' className='btn btn-primary drawer-button lg:hidden mt-0 mb-4'>Open drawer</label>
+                    <div className='drawer-content p-2 h-full z-50 w-7/8'>
+                         <label htmlFor='my-drawer-2' className='btn btn-primary drawer-button lg:hidden mt-0 mb-4'>Menu</label>
                          <Outlet />                     
                     </div> 
                     <div className='drawer-side lg:border-r-2 lg:border-r-[#aaa]'>

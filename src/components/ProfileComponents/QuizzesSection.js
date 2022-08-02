@@ -1,8 +1,12 @@
 import React from 'react';
-import quizzes from '../../assets/quizzes';
+import database from '../../assets/database.json';
 import SingleCard from './SingleCard';
 
 const QuizzesSection = () => {
+     const quizzes = Object.keys(database.quizzes).map(key => {
+          return database.quizzes[key];
+     });
+
      // sort by isAvailable
      const sortArray = quizzes.sort((x, y) => {
           return (x.isAvailable === y.isAvailable) ? 0 : x.isAvailable ? -1 : 1;

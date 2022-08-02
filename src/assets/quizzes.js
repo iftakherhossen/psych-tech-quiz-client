@@ -1,4 +1,4 @@
-const courses = [
+const quizzes = [
      {
           id: 17001,
           name: "JavaScript",
@@ -210,4 +210,4 @@ const courses = [
      },
 ];
 
-export default courses;
+export default quizzes;

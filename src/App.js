@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
+import PrivateRoute from "./components/Authentication/PrivateRoute";
 import Footer from './components/Common/Footer';
 import Navigation from './components/Common/Navigation';
 import ProfileSection from "./components/ProfileComponents/ProfileSection";
@@ -27,10 +28,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/joinNow" element={<JoinNow />} />
           <Route path="/forum" element={<Forum />} />
-          <Route path="/playground" element={<Playground />} />
-          <Route path="/quiz/:name" element={<Quiz />} />
-          <Route path="/quiz/:name/result" element={<QuizResult />} />
-          <Route path="/user/:email" element={<Profile />}>
+          <Route path="/playground" element={<PrivateRoute><Playground /></PrivateRoute>} />
+          <Route path="/quiz/:name" element={<PrivateRoute><Quiz /></PrivateRoute>} />
+          <Route path="/quiz/:name/result" element={<PrivateRoute><QuizResult /></PrivateRoute>} />
+          <Route path="/user/:email" element={<PrivateRoute><Profile /></PrivateRoute>}>
             <Route index element={<ProfileSection />} />            
             <Route path="quizzes" element={<QuizzesSection />} />            
             <Route path="solved-problems" element={<SolvedProblemsSection />} />            
