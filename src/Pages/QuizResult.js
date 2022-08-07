@@ -1,7 +1,6 @@
 import React from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
-import questions from '../assets/questions';
 import useAuth from '../hooks/useAuth';
 
 const QuizResult = () => {
@@ -9,6 +8,7 @@ const QuizResult = () => {
      const location = useLocation();
      const quizScore = location.state[1];
      const { user } = useAuth();
+     const questions = location.state[2][0].questions;
 
      const handleClear = () => {
           navigate(`/user/${user.email}`);
@@ -20,7 +20,7 @@ const QuizResult = () => {
           </span>
      ));
 
-     console.log(location.state[0]);
+     
 
      return (
           <div className='bg-white dark:bg-slate-800'>
@@ -31,7 +31,7 @@ const QuizResult = () => {
                               <div className='pt-10 pb-6 flex flex-col justify-center px-5 bg-slate-300' key={quiz.questionNo}>
                                    <div className='mb-2'>
                                         <h2 className='text-2xl text-center text-blue-900 font-semibold'>
-                                             {quiz.questionText}
+                                             {quiz.question}
                                         </h2>
                                    </div>
                                    <form className='w-5/6 mx-auto'>

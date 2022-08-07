@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsFillQuestionSquareFill } from 'react-icons/bs';
 import { FaArrowRight } from 'react-icons/fa';
 import { MdTimer } from 'react-icons/md';
 import { TailSpin } from 'react-loader-spinner';
 import { useNavigate, useParams } from 'react-router-dom';
-import questions from '../assets/questions';
-import quizzes from '../assets/quizzes';
+import database from '../assets/database.json';
 import QuizSection from '../components/QuizPageComponents/QuizSection';
 
 const Quiz = () => {
      let params = useParams();
      let navigate = useNavigate();
-     const quizCard = quizzes.filter(quiz => quiz.name.toLowerCase() === params.name);
+
+     const quizzes = Object.keys(database.quizzes).map(key => {
+          return database.quizzes[key];
+     });
+     const questions = Object.keys(database.questions).map(key => {
+          return database.questions[key];
+     });
+
+     const quizCard = quizzes.filter(quiz => quiz.slug === params.name);
+     const questionSet = questions.filter(question => question.slug === params.name);
      const [score, setScore] = useState(0);
      const [nextId, setNextId] = useState(0);
      const [progressValue, setProgressValue] = useState(0);
@@ -19,17 +27,18 @@ const Quiz = () => {
      const [optionsList, setOptionsList] = useState([]);
      const [answered, setAnswered] = useState([]);
      const [answerNo, setAnswerNo] = useState();
+     const [checked, setChecked] = useState(false);
 
      const startQuiz = () => {
           const display = document.getElementById('timer');
-          const twoMinutes = 30 * 5;
+          const twoMinutes = 30 * 4;
           startExpire(twoMinutes, display);
 
-          const question = questions[0];
+          const question = questionSet[0].questions[0];
           const next = question.questionNo + 1;
 
           const answered = question.questionNo - 1;
-          const stepTotal = question.totalQuestions;
+          const stepTotal = questionSet[0].questions.length;
 
           // get current progress bar
           const progress = (answered / stepTotal) * 100;
@@ -39,7 +48,7 @@ const Quiz = () => {
           if (question.isFinalQuestion !== true) {
                document.getElementById('start').style.display = 'none';
                document.getElementById('quiz').style.display = 'block';
-               document.getElementById('questionText').innerText = question.questionText;
+               document.getElementById('questionText').innerText = question.question;
 
                setOptionsList(question.answerOptions);
                setNextId(next);
@@ -49,14 +58,16 @@ const Quiz = () => {
 
      const nextQuestion = (questionId) => {
           document.getElementById(`${answerNo}`).checked = false;
+          setChecked(false);
 
           setOptionsList([]);
-          const question = questions.find(value => value.questionNo === questionId);
+          const quiz = questionSet[0].questions
+          const question = quiz.find(value => value.questionNo === questionId);
           let next;
 
           if (question && (!question.isFinalQuestion || question.answerOptions !== null)) {
                next = question.questionNo + 1;
-               document.getElementById('questionText').innerText = question.questionText;
+               document.getElementById('questionText').innerText = question.question;
                setOptionsList(question.answerOptions);
                setNextId(next);
 
@@ -100,12 +111,13 @@ const Quiz = () => {
                document.getElementById('timer').style.display = 'none';
           }, 1500);
           setTimeout(() => {
-               navigate('result', {state: [answered, score]});
+               navigate('result', {state: [answered, score, questionSet]});
           }, 3000);
      }
 
      const handleScore = (isCorrect, answerText, answerNo) => {
           setAnswerNo(answerNo);
+          setChecked(true);
           if (isCorrect) {
                setScore(score + 1);
           }          
@@ -113,18 +125,20 @@ const Quiz = () => {
           // nextQuestion(nextId);
      }
 
+     
+
      return (
           <div className='bg-white dark:bg-slate-800 pb-8 h-full'>
                <div className='container mx-auto py-36' id='start'>
                     <div className='bg-slate-300 w-5/6 mx-auto rounded-xl py-10 text-lg text-center'>
-                         <h1 className='text-4xl mb-6'>Start <strong>{quizCard[0].name}</strong> Quiz!</h1>
-                         <p className='text-lg'>{quizCard[0].description}</p>
+                         <h1 className='text-4xl mb-6'>Start <strong>{quizCard.name}</strong> Quiz!</h1>
+                         <p className='text-lg'>{quizCard.description}</p>
                          <p className='mt-4'>
                               Act Fast! The timer will start running once you click the Start!  
                          </p>
                          <div className='flex justify-center items-center py-4 mt-4'>
                               <MdTimer style={{ fontSize: 28 }} className='mr-2' />
-                              <p className='text-xl font-medium'><b>2:30</b> Minutes | <b>{quizCard[0].question}</b> Questions</p>
+                              <p className='text-xl font-medium'><b>2</b> Minutes | <b>{quizCard.question}</b> Questions</p>
                               <BsFillQuestionSquareFill style={{ fontSize: 22 }} className='ml-2' />
                          </div>
                          <div className='flex justify-center pt-4'>
@@ -156,6 +170,7 @@ const Quiz = () => {
                          optionsList={optionsList}
                          nextQuestion={nextQuestion}
                          handleScore={handleScore}
+                         checked={checked}
                    />
                </div>
           </div>

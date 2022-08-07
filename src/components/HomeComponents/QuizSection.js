@@ -13,6 +13,10 @@ const QuizSection = () => {
           return database.quizzes[key];
      });
 
+     // const questions = Object.keys(database.questions).map(key => {
+     //      return database.questions[key];
+     // });
+
      // sort by isAvailable
      // const sortArray = quizzes.sort((x, y) => {
      //      return (x.isAvailable === y.isAvailable) ? 0 : x.isAvailable ? -1 : 1;

@@ -1,8 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const SingleCard = ({ course, problem }) => {
-     const { id, name, image, description, question, isAvailable } = course;
+     const { id, name, slug, image, description, questionNo, isAvailable } = course;
+     let navigate = useNavigate();
+
+     const handleButton = () => {
+          if (problem) return navigate(`problem-solving/${slug}`);
+          else navigate(`quizzes/${slug}`, {state: course});
+     }
 
      return (
           <div className="card w-full bg-base-100 shadow-xl image-full" key={id}>
@@ -15,17 +21,15 @@ const SingleCard = ({ course, problem }) => {
                     <p>{description}</p>
                     <div className="flex justify-between mt-3">
                          <div className="card-actions">
-                              <h4 className="bg-rose-500 border-0 py-1 rounded-lg px-4">Question: {question}</h4>
+                              <h4 className="bg-rose-500 border-0 py-1 rounded-lg px-4">Question: {questionNo}</h4>
                          </div>
                          <div className="card-actions">
                               {
-                                   !isAvailable === false ? <Link to={!problem ? `/quiz/${name === 'C#' ? 'csharp' : name.toLowerCase().replace(/\s/g, '')}` : `/problem-solving/${name === 'C#' ? 'csharp' : name.toLowerCase().replace(/\s/g, '')}`}>
-                                        <button className="btn bg-rose-500 border-0 btn-sm px-4 disabled:bg-rose-300 disabled:text-slate-500">
-                                             {
-                                                  problem ? (isAvailable === false ? 'Coming Soon' : 'Solve Problems') : (isAvailable === false ? 'Coming Soon' : 'Join Quiz')
-                                             }
-                                        </button>
-                                   </Link> : <button className="btn bg-rose-500 border-0 btn-sm px-4 disabled:bg-rose-300 disabled:text-slate-500" disabled>
+                                   !isAvailable === false ? <button className="btn bg-rose-500 border-0 btn-sm px-4 disabled:bg-rose-300 disabled:text-slate-500" onClick={handleButton}>
+                                        {
+                                             problem ? (isAvailable === false ? 'Coming Soon' : 'Solve Problems') : (isAvailable === false ? 'Coming Soon' : 'Join Quiz')
+                                        }
+                                   </button> : <button className="btn bg-rose-500 border-0 btn-sm px-4 disabled:bg-rose-300 disabled:text-slate-500" disabled>
                                         {
                                              problem ? (isAvailable === false ? 'Coming Soon' : 'Solve Problems') : (isAvailable === false ? 'Coming Soon' : 'Join Quiz')
                                         } 

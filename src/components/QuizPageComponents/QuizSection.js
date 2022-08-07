@@ -2,7 +2,7 @@ import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 import { TailSpin } from 'react-loader-spinner';
 
-const QuizSection = ({ nextId, progressValue, validated, optionsList, nextQuestion, handleScore }) => {
+const QuizSection = ({ nextId, progressValue, validated, optionsList, nextQuestion, handleScore, checked }) => {
      return (
           <div>
                <progress className='progress w-full absolute progress-accent transition ease-in-out delay-150' value={progressValue} max='100' id='percentCount'></progress>
@@ -22,6 +22,7 @@ const QuizSection = ({ nextId, progressValue, validated, optionsList, nextQuesti
                                              className='radio radio-sm mr-2 checked:bg-blue-900'
                                              value={answerNo}
                                              onChange={() => handleScore(isCorrect, answerText, answerNo)}
+                                             required
                                         />
                                         <p className='text-lg font-bold'>{answerText}</p>
                                    </div>)
@@ -31,13 +32,13 @@ const QuizSection = ({ nextId, progressValue, validated, optionsList, nextQuesti
                               validated && <div className='loading flex justify-center items-center m-auto'>
                                    <TailSpin color='grey' />
                               </div>
-                         }
+                         } 
                     </form>
                </div>
 
                <div className='mx-auto w-3/4 sm:2/4 md:w-1/4'>
                     {
-                         <button className='flex justify-center items-center py-3 px-8 mt-8 mb-4 rounded-full bg-rose-500 text-white mx-auto disabled:bg-slate-300 disabled:cursor-not-allowed' onClick={() => nextQuestion(nextId)}>
+                         <button className='flex justify-center items-center py-3 px-8 mt-8 mb-4 rounded-full bg-rose-500 text-white mx-auto disabled:bg-slate-300 disabled:cursor-not-allowed' onClick={() => nextQuestion(nextId)} disabled={!checked}>
                               <p className='text-xl font-medium'>Next</p>
                               <FaArrowRight style={{ fontSize: 15 }} className='ml-2' />
                          </button>

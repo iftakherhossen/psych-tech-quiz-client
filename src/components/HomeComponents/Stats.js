@@ -16,7 +16,7 @@ const Stats = () => {
                               <MdQuiz className="text-4xl" />
                          </div>                         
                          <div className="stat-value text-secondary">{quizzes}+ & {problems}+</div>
-                         <div className="stat-title text-secondary text-xl opacity-100">Quiz & Problem Solving Category</div>
+                         <div className="stat-title text-secondary text-xl opacity-100">Quiz & Problem Solving</div>
                     </div>
                     <div className="divider divider-horizontal"></div>
                     <div className="stat">
